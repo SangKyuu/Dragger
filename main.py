@@ -173,7 +173,8 @@ class Graphics(QMainWindow):
         super(Graphics, self).__init__(parent)
 
         self.window_w, self.window_h = parent.width - 50, parent.height - 50
-        self.setGeometry(parent.left + 20, parent.top + 20, self.window_w, self.window_h)
+        self.top, self.left = parent.top + 20, parent.left + 20
+        self.setGeometry(self.top, self.left, self.window_w, self.window_h)
         self.init_file = parent.img_file
 
         # 파라미터
@@ -238,6 +239,7 @@ class Graphics(QMainWindow):
 
         self.menuBar().addMenu(self.viewMenu)
         self.menuBar().addMenu(self.toolMenu)
+        self.menuBar().hide()
 
     def set_image(self):
         global objs
