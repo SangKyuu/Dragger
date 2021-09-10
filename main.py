@@ -192,18 +192,24 @@ class Graphics(QMainWindow):
         self.c_item_coord = 0
 
         # 드래그 공간
-        self.setCentralWidget(self._initGraphics())
+
+        scroll = QScrollArea(self)
+        scroll.setWidget(self._initGraphics())
+        self.setCentralWidget(scroll)
         self.createActions()
         self.createMenus()
         self._start = QPointF()
 
     def _initGraphics(self):
         self.graphicsView = QGraphicsView(self)
+        self.graphicsView.setGeometry(40,30,0,0)
         self.scene = GraphicsScene(self)
         self.pixmap = QGraphicsPixmapItem()
         self.pixmap.setFlags(QGraphicsItem.ItemIsFocusable)
         self.scene.addItem(self.pixmap)
         self.graphicsView.setScene(self.scene)
+        return self.graphicsView
+
 
     def createActions(self):
         self.zoomInAct = QAction("Zoom &In (25%)", self, shortcut="Ctrl+Z", enabled=True, triggered=self.zoomIn)
@@ -221,6 +227,7 @@ class Graphics(QMainWindow):
         self.delete = QAction("Delete &Image", self, shortcut='Ctrl+I', triggered=self.delete_img)
 
     def createMenus(self):
+        menubar = self.menuBar()
         self.viewMenu = QMenu("&View", self)
         self.viewMenu.addAction(self.zoomInAct)
         self.viewMenu.addAction(self.zoomOutAct)
@@ -237,9 +244,10 @@ class Graphics(QMainWindow):
         self.toolMenu.addAction(self.save)
         self.toolMenu.addAction(self.delete)
 
-        self.menuBar().addMenu(self.viewMenu)
-        self.menuBar().addMenu(self.toolMenu)
-        self.menuBar().hide()
+        menubar.addMenu(self.viewMenu)
+        menubar.addMenu(self.toolMenu)
+        # menubar.setVisible(False)
+
 
     def set_image(self):
         global objs
