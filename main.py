@@ -500,9 +500,14 @@ class GraphicsScene(QGraphicsScene):
         if self._current_item:
             _bbox = self._current_item.boundingRect()
             c_x, c_y, b_w, b_h = _bbox.center().x(), _bbox.center().y(), _bbox.width(), _bbox.height()
-            _img = self.sceneRect().size()
-            img_w, img_h = _img.width(), _img.height()
-            objs.append([0, c_x/img_w, c_y/img_h, b_w/img_w, b_h/img_h])
+            if b_w > 15 and b_h > 15:
+                _img = self.sceneRect().size()
+                img_w, img_h = _img.width(), _img.height()
+                objs.append([0, c_x/img_w, c_y/img_h, b_w/img_w, b_h/img_h])
+            else:
+                self.removeItem(self._current_item)
+                items.pop(-1)
+
         self._current_item = None
         if len(self.item) == 1:
             assert type(self.item[0]) == QGraphicsRectItem
