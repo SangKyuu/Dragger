@@ -25,3 +25,9 @@ paste Box Crtl+V
 Save Crtl+S
 
 Delete Image Crtl+I
+
+
+## exe파일 생성 터미널 코드
+```bash
+$ pyinstaller -F -n Dragger.exe -i .\snoopy.ico main.py
+```
