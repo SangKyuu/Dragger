@@ -1,5 +1,8 @@
 # Dragger
 
+![all](https://user-images.githubusercontent.com/41942097/230723762-3590fc1a-1d91-443e-a12d-491317cb4228.gif)
+
+
 ## keys
 
 Zoom In  Crtl+Z
